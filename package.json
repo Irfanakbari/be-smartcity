@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.3.0",
+    "mocha": "^9.2.2",
+    "mysql2": "^2.3.3"
+  },
+  "name": "be-smartcity",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "backend smartcity",
+  "main": "hmz.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "author": "Irfan Akbari Habibi",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
