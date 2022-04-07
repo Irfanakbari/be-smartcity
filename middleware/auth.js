@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import 'dotenv/config';
 const { SECRET_KEY } = process.env;
+import isJwtTokenExpired from 'jwt-check-expiry';
 
 const key = "habib18102002";
 
@@ -47,7 +48,8 @@ const verifyToken2 = (req, res, next) => {
     }
 } 
 
+
 export default {
     verifyToken,
-    verifyToken2
+    verifyToken2,
 };

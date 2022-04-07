@@ -15,6 +15,9 @@ app.get('/', (req, res) => {
 // auth
 app.post('/login', login.login);
 app.post('/register', login.register);
+app.get('/me', middleware.verifyToken2, (req, res) => {
+    res.send(req.user);
+    });
 
 // e-dokter
 app.get('/api/edokter/myjadwal',middleware.verifyToken2, edokter.getJadwal );
