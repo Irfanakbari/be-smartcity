@@ -9,21 +9,21 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
-    }
+}
 );
 
 // auth
 app.post('/login', login.login);
 app.post('/register', login.register);
-app.get('/me', middleware.verifyToken2, (req, res) => {
+app.get('/saya', middleware.verifyToken2, (req, res) => {
     res.send(req.user);
-    });
+});
 
 // e-dokter
-app.get('/api/edokter/myjadwal',middleware.verifyToken2, edokter.getJadwal );
-app.post('/api/edokter/jadwal',middleware.verifyToken2, edokter.postJadwal );
-app.get('/api/edokter/rs', edokter.getAllRS );
-app.get('/api/edokter/dokter/:id_rs', edokter.getAllDokter );
+app.get('/api/edokter/myjadwal', middleware.verifyToken2, edokter.getJadwal);
+app.post('/api/edokter/jadwal', middleware.verifyToken2, edokter.postJadwal);
+app.get('/api/edokter/rs', edokter.getAllRS);
+app.get('/api/edokter/dokter/:id_rs', edokter.getAllDokter);
 
 
 // e-trash
