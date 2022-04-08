@@ -10,11 +10,12 @@ const key = "habib18102002";
 const login = (req, res) => {
     const { nik, password } = req.body;
     let enkripsi = md5(password);
+
     koneksi.query(
         "SELECT * FROM users WHERE nik = ?",
         [nik],
-        (err, results) => {
-            if (err) {
+        (error, results, fields) => {
+            if (error) {
                 res.status(500).send(err);
             } else {
                 if (results.length > 0) {
@@ -41,10 +42,13 @@ const login = (req, res) => {
                     } else {
                         res.status(404).send("User not found");
                     }
+                } else {
+                    res.status(404).send("User not found");
                 }
             }
         }
     );
+
 };
 
 
