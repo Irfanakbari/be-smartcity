@@ -14,7 +14,7 @@ const getJadwal = (req, res) => {
             }
         );
     } catch (err) {
-        return res.status(401).send({
+        return res.status(500).send({
             message: "Error",
         });
     }
@@ -36,7 +36,7 @@ const postJadwal = (req, res) => {
         );
 
     } catch (err) {
-        return res.status(401).send({
+        return res.status(500).send({
             message: "Error",
         });
     }
@@ -55,7 +55,7 @@ const getAllRS = (req, res) => {
             }
         );
     } catch (err) {
-        return res.status(401).send({
+        return res.status(500).send({
             message: "Error",
         });
     }
@@ -76,7 +76,28 @@ const getAllDokter = (req, res) => {
             }
         );
     } catch (err) {
-        return res.status(401).send({
+        return res.status(500).send({
+            message: "Error",
+        });
+    }
+}
+
+const getAllPoli = (req, res) => {
+    const { id_rs } = req.params;
+    try {
+        koneksi.query(
+            "SELECT * FROM edokter_poli WHERE id_rs = ?",
+            [id_rs],
+            (err, results) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.status(200).send(results);
+                }
+            }
+        );
+    } catch (err) {
+        return res.status(500).send({
             message: "Error",
         });
     }
@@ -86,5 +107,6 @@ const getAllDokter = (req, res) => {
         getJadwal,
         postJadwal,
         getAllRS,
-        getAllDokter
+        getAllDokter,
+        getAllPoli,
     };
