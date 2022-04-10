@@ -3,7 +3,7 @@ import koneksi from "../config/database.js";
 const getJadwal = (req, res) => {
     try {
         koneksi.query(
-            "SELECT * FROM edokter_reservasi JOIN edokter_dokter ON edokter_reservasi.id_dokter = edokter_dokter.id_dokter JOIN edokter_rs ON edokter_reservasi.id_rs = edokter_rs.id_rs JOIN edokter_poli ON edokter_reservasi.id_poli = edokter_poli.id_poli  WHERE nik_pasien = ? LIMIT 10 ORDER BY id_reservasi DESC",
+            "SELECT * FROM edokter_reservasi ORDER BY id_reservasi DESC JOIN edokter_dokter ON edokter_reservasi.id_dokter = edokter_dokter.id_dokter JOIN edokter_rs ON edokter_reservasi.id_rs = edokter_rs.id_rs JOIN edokter_poli ON edokter_reservasi.id_poli = edokter_poli.id_poli  WHERE nik_pasien = ? LIMIT 10 ",
             [req.user.nik],
             (err, results) => {
                 if (err) {
