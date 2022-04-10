@@ -24,7 +24,7 @@ const postJadwal = (req, res) => {
     try {
         const { nik, nama, usia, jk, alamat, rs_tujuan, poli, tanggal, keluhan, dokter } = req.body;
         koneksi.query(
-            "INSERT INTO edokter_reservasi (nik_pasien, id_dokter, id_rs, tanggal, nama, jk, usia, alamat, id_poli, keluhan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO reservasi (nik_pasien, id_dokter, id_rs, tanggal, nama, jk, usia, alamat, poli, keluhan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [nik, dokter,  rs_tujuan, tanggal, nama, jk, usia, alamat, poli, keluhan],
             (err, results) => {
                 if (err) {
@@ -62,7 +62,7 @@ const getAllRS = (req, res) => {
 }
 
 const getAllDokter = (req, res) => {
-    const { id_rs, id_poli } = req.params;
+    const { id_rs } = req.params;
     try {
         koneksi.query(
             "SELECT * FROM dokter WHERE id_rs = ? AND id_poli = ?",
