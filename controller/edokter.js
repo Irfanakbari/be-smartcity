@@ -24,7 +24,7 @@ const postJadwal = (req, res) => {
     try {
         const { nik, nama, usia, jk, alamat, rs_tujuan, poli, tanggal, keluhan, dokter } = req.body;
         koneksi.query(
-            "INSERT INTO reservasi (nik_pasien, id_dokter, id_rs, tanggal, nama, jk, usia, alamat, poli, keluhan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO reservasi (nik_pasien, id_dokter, id_rs, tanggal, nama, jk, usia, alamat, id_poli, keluhan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [nik, dokter,  rs_tujuan, tanggal, nama, jk, usia, alamat, poli, keluhan],
             (err, results) => {
                 if (err) {
