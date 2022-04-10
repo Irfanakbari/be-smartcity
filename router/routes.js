@@ -23,7 +23,7 @@ app.get('/saya', middleware.verifyToken2, (req, res) => {
 app.get('/api/edokter/myjadwal', middleware.verifyToken2, edokter.getJadwal);
 app.post('/api/edokter/jadwal', middleware.verifyToken2, edokter.postJadwal);
 app.get('/api/edokter/rs', edokter.getAllRS);
-app.get('/api/edokter/dokter/:id_rs/:id_poli', edokter.getAllDokter);
+app.get('/api/edokter/dokter/:id_rs', edokter.getAllDokter);
 app.get('/api/edokter/poli/:id_rs', edokter.getAllPoli);
 
 
