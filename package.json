@@ -12,7 +12,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "backend smartcity",
-  "main": "hmz.js",
+  "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
     "test": "mocha",
