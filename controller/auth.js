@@ -54,11 +54,11 @@ const login = (req, res) => {
 
 
 const register = async (req, res) => {
-    const { nik, password, nama, alamat, role } = req.body;
+    const { nik, password, nama, alamat, role,jk } = req.body;
     let enkripsi = md5(password);
     koneksi.query(
-        "INSERT INTO users (nik, full_name, alamat, password, role) VALUES (?, ?, ?, ?, ?)",
-        [nik, nama, alamat, enkripsi, role],
+        "INSERT INTO users (nik, full_name, alamat, password, role,jk) VALUES (?, ?, ?, ?, ?)",
+        [nik, nama, alamat, enkripsi, role,jk],
         (err, results) => {
             if (err) {
                 if (err.code === "ER_DUP_ENTRY") {
