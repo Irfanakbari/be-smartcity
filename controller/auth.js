@@ -27,6 +27,7 @@ const login = (req, res) => {
                                 nama: results[0].full_name,
                                 alamat: results[0].alamat,
                                 role: results[0].role,
+                                jk: results[0].jk,
                             },
                             key,
                             { expiresIn: "10h" }
