@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import login from '../controller/auth.js';
 import edokter from '../controller/edokter.js';
 import middleware from '../middleware/auth.js';
@@ -6,6 +7,7 @@ import etrash from '../controller/etrash.js'
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
