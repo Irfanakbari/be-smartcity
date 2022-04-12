@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import fileUpload from 'express-fileupload';
 import login from '../controller/auth.js';
 import edokter from '../controller/edokter.js';
 import middleware from '../middleware/auth.js';
@@ -8,6 +9,7 @@ import etrash from '../controller/etrash.js'
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(fileUpload());
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -32,6 +34,7 @@ app.get('/api/edokter/admin/home', middleware.verifyToken, edokter.admGetHome);
 app.get('/api/edokter/admin/dokter', middleware.verifyToken, edokter.admGetDokter);
 app.delete('/api/edokter/admin/dokter/:id', middleware.verifyToken, edokter.admDelDokter);
 app.post('/api/edokter/admin/dokter', middleware.verifyToken, edokter.admPostDokter);
+app.get('/api/edokter/admin/dokterimage/:id',  edokter.admGetDokterImage);
 
 
 // e-trash

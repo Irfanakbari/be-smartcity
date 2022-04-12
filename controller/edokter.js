@@ -1,4 +1,5 @@
 import koneksi from "../config/database.js";
+import path from "path";
 
 const getJadwal = (req, res) => {
     try {
@@ -217,15 +218,15 @@ const admDelDokter = async (req, res) => {
 
 const admPostDokter = async (req, res) => {
     const { id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis } = req.body;
-    const { foto } = req.files;
+    const  {foto}  = req.files;
     try {
         foto.mv(`./public/images/dokter/${foto.name}`, async (err) => {
             if (err) {
                 return res.status(500).send(err);
             }
             koneksi.query(
-                "INSERT INTO edokter_dokter (id_dokter, dr_name, dr_notelp, id_poli, id_rs, spesialis, avatar) VALUES (?, ?, ?, ?, ?, ?,?)",
-                [id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis, './public/images/dokter/' + foto.name],
+                "INSERT INTO edokter_dokter (id_dokter, dr_name, dr_notelp, id_poli, id_rs, spesialis, avatar_picture) VALUES (?, ?, ?, ?, ?, ?,?)",
+                [id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis,  foto.name],
                 (err, results) => {
                     if (err) {
                         res.status(500).send(err);
@@ -241,6 +242,12 @@ const admPostDokter = async (req, res) => {
             message: "Error",
         });
     }
+}
+
+const admGetDokterImage = async (req, res) => {
+    const { id } = req.params;
+    const location = './public/images/dokter/';
+    return res.sendFile(path.resolve(location + id + '.jpg'));
 }
 
 
@@ -271,4 +278,5 @@ export default {
     admGetDokter,
     admDelDokter,
     admPostDokter,
+    admGetDokterImage
 };
