@@ -233,7 +233,7 @@ const admPostDokter = async (req, res) => {
             }
             koneksi.query(
                 "INSERT INTO edokter_dokter (id_dokter, dr_name, dr_notelp, id_poli, id_rs, spesialis, avatar_picture) VALUES (?, ?, ?, ?, ?, ?,?)",
-                [id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis,  foto.name],
+                [id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis,  `${id_dokter}.jpg`],
                 (err, results) => {
                     if (err) {
                         res.status(500).send(err);
