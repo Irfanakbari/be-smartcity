@@ -193,11 +193,11 @@ const admGetDokter = async (req, res) => {
 }
 
 const admDelDokter = async (req, res) => {
-    const { id_dokter } = req.params;
+    const { id } = req.params;
     try {
         koneksi.query(
             "DELETE FROM edokter_dokter WHERE id_dokter = ?",
-            [id_dokter],
+            [id],
             (err, results) => {
                 if (err) {
                     res.status(500).send(err);
