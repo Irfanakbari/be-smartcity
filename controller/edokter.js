@@ -166,6 +166,31 @@ const admGetHome = async (req, res) => {
 
 }
 
+const admGetDokter = async (req, res) => {
+    const nik = req.user.nik;
+    var me = await getMe(nik);
+    let data;
+    
+    try {
+        koneksi.query(
+            "SELECT * FROM edokter_dokter  JOIN edokter_poli ON edokter_dokter.id_poli = edokter_poli.id_poli WHERE edokter_dokter.id_rs = ?",
+            [me[0].id_rs],
+            (err, results) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    data = results;
+                    res.status(200).send(data);
+                }
+            }
+        );
+    }
+    catch (err) {
+        return res.status(500).send({
+            message: "Error",
+        });
+    }
+}
 
 function getMe(nik) {
     return new Promise((resolve, reject) => {
@@ -190,5 +215,6 @@ export default {
     getAllRS,
     getAllDokter,
     getAllPoli,
-    admGetHome
+    admGetHome,
+    admGetDokter
 };

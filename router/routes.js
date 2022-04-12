@@ -29,6 +29,7 @@ app.get('/api/edokter/dokter/:id_rs/:id_poli', edokter.getAllDokter);
 app.get('/api/edokter/poli/:id_rs', edokter.getAllPoli);
 // e-dokter admin
 app.get('/api/edokter/admin/home', middleware.verifyToken, edokter.admGetHome);
+app.get('/api/edokter/admin/dokter', middleware.verifyToken, edokter.admGetDokter);
 
 
 // e-trash
