@@ -6,7 +6,8 @@ const koneksi = mysql.createConnection({
     host: '103.55.39.44',
     user: 'kanadeex_npm',
     password: 'habib18102002',
-    database: 'kanadeex_npm'
+    database: 'kanadeex_npm',
+    multipleStatements: true
 });
 
 export default koneksi;

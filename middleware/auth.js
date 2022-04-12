@@ -16,11 +16,12 @@ const verifyToken = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, key);
         req.user = decoded;
-        if (decoded.role !== "superadmin" || decoded.role !== "admin") {
+        if ((decoded.role != "adminrs")) {
             return res.status(401).send({
-                message: "Access Denied",
+                message: "Your Account is not authorized to access this resource",
             });
         }
+
         next();
     } catch (err) {
         return res.status(401).send({
@@ -46,7 +47,7 @@ const verifyToken2 = (req, res, next) => {
             message: "Invalid Token",
         });
     }
-} 
+}
 
 
 export default {

@@ -25,6 +25,8 @@ app.post('/api/edokter/jadwal', middleware.verifyToken2, edokter.postJadwal);
 app.get('/api/edokter/rs', edokter.getAllRS);
 app.get('/api/edokter/dokter/:id_rs/:id_poli', edokter.getAllDokter);
 app.get('/api/edokter/poli/:id_rs', edokter.getAllPoli);
+// e-dokter admin
+app.get('/api/edokter/admin/home', middleware.verifyToken, edokter.admGetHome);
 
 
 // e-trash
