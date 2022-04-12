@@ -123,7 +123,7 @@ const admGetHome = async (req, res) => {
                     let batal = data.filter(item => item.status == 0).length;
                     let pria = data.filter(item => item.jk == "Laki-Laki").length;
                     let wanita = data.filter(item => item.jk == "Perempuan").length;
-
+                    let id_rs = me[0].id_rs;
 
                     let rs_name = data.map(item => item.nama_rs).filter((item, index, self) => self.indexOf(item) === index);
                     let total_rs = rs_name.map(item => {
@@ -144,6 +144,7 @@ const admGetHome = async (req, res) => {
                     res.status(200).send(
                         {
                             total,
+                            id_rs,
                             pending,
                             selesai,
                             batal,
