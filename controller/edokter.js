@@ -1,5 +1,6 @@
 import koneksi from "../config/database.js";
 import path from "path";
+import fs from "fs-extra";
 
 const getJadwal = (req, res) => {
     try {
@@ -197,6 +198,7 @@ const admGetDokter = async (req, res) => {
 const admDelDokter = async (req, res) => {
     const { id } = req.params;
     try {
+        fs.remove(`./public/images/dokter/${id}.jpg`);
         koneksi.query(
             "DELETE FROM edokter_dokter WHERE id_dokter = ?",
             [id],
@@ -225,7 +227,7 @@ const admPostDokter = async (req, res) => {
     const { id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis } = req.body;
     const  {foto}  = req.files;
     try {
-        foto.mv(`./public/images/dokter/${foto.name}`, async (err) => {
+        foto.mv(`./public/images/dokter/${id_dokter}`, async (err) => {
             if (err) {
                 return res.status(500).send(err);
             }
