@@ -215,6 +215,28 @@ const admDelDokter = async (req, res) => {
     }
 }
 
+const admPostDokter = async (req, res) => {
+    const { id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis } = req.body;
+    try {
+        koneksi.query(
+            "INSERT INTO edokter_dokter (id_dokter, dr_name, dr_notelp, id_poli, id_rs, spesialis) VALUES (?, ?, ?, ?, ?, ?)",
+            [id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis],
+            (err, results) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.status(200).send(results);
+                }
+            }
+        );
+    }
+    catch (err) {
+        return res.status(500).send({
+            message: "Error",
+        });
+    }
+}
+
 
 function getMe(nik) {
     return new Promise((resolve, reject) => {
@@ -241,5 +263,6 @@ export default {
     getAllPoli,
     admGetHome,
     admGetDokter,
-    admDelDokter
+    admDelDokter,
+    admPostDokter,
 };

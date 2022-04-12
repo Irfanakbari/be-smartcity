@@ -31,6 +31,7 @@ app.get('/api/edokter/poli/:id_rs', edokter.getAllPoli);
 app.get('/api/edokter/admin/home', middleware.verifyToken, edokter.admGetHome);
 app.get('/api/edokter/admin/dokter', middleware.verifyToken, edokter.admGetDokter);
 app.delete('/api/edokter/admin/dokter/:id', middleware.verifyToken, edokter.admDelDokter);
+app.post('/api/edokter/admin/dokter', middleware.verifyToken, edokter.admPostDokter);
 
 
 // e-trash
