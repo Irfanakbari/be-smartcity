@@ -217,6 +217,11 @@ const admDelDokter = async (req, res) => {
 }
 
 const admPostDokter = async (req, res) => {
+    if (req.body == null) {
+        return res.status(400).send({
+            message: "Request body is missing",
+        });
+    }
     const { id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis } = req.body;
     const  {foto}  = req.files;
     try {
