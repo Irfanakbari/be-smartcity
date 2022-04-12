@@ -169,7 +169,7 @@ const admGetHome = async (req, res) => {
 const admGetDokter = async (req, res) => {
     const nik = req.user.nik;
     var me = await getMe(nik);
-    let data;
+    var data;
     
     try {
         koneksi.query(
@@ -191,6 +191,29 @@ const admGetDokter = async (req, res) => {
         });
     }
 }
+
+const admDelDokter = async (req, res) => {
+    const { id_dokter } = req.params;
+    try {
+        koneksi.query(
+            "DELETE FROM edokter_dokter WHERE id_dokter = ?",
+            [id_dokter],
+            (err, results) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.status(200).send(results);
+                }
+            }
+        );
+    }
+    catch (err) {
+        return res.status(500).send({
+            message: "Error",
+        });
+    }
+}
+
 
 function getMe(nik) {
     return new Promise((resolve, reject) => {
@@ -216,5 +239,6 @@ export default {
     getAllDokter,
     getAllPoli,
     admGetHome,
-    admGetDokter
+    admGetDokter,
+    admDelDokter
 };
