@@ -171,7 +171,7 @@ const admGetDokter = async (req, res) => {
     const nik = req.user.nik;
     var me = await getMe(nik);
     var data;
-    
+
     try {
         koneksi.query(
             "SELECT * FROM edokter_dokter  JOIN edokter_poli ON edokter_dokter.id_poli = edokter_poli.id_poli WHERE edokter_dokter.id_rs = ?",
@@ -217,18 +217,24 @@ const admDelDokter = async (req, res) => {
 
 const admPostDokter = async (req, res) => {
     const { id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis } = req.body;
+    const { foto } = req.files;
     try {
-        koneksi.query(
-            "INSERT INTO edokter_dokter (id_dokter, dr_name, dr_notelp, id_poli, id_rs, spesialis) VALUES (?, ?, ?, ?, ?, ?)",
-            [id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis],
-            (err, results) => {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.status(200).send(results);
-                }
+        foto.mv(`./public/images/dokter/${foto.name}`, async (err) => {
+            if (err) {
+                return res.status(500).send(err);
             }
-        );
+            koneksi.query(
+                "INSERT INTO edokter_dokter (id_dokter, dr_name, dr_notelp, id_poli, id_rs, spesialis, avatar) VALUES (?, ?, ?, ?, ?, ?,?)",
+                [id_dokter, nama_dokter, notelp, id_poli, id_rs, spesialis, './public/images/dokter/' + foto.name],
+                (err, results) => {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else {
+                        res.status(200).send(results);
+                    }
+                }
+            );
+        });
     }
     catch (err) {
         return res.status(500).send({
