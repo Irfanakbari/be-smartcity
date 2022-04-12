@@ -6,11 +6,12 @@ import edokter from '../controller/edokter.js';
 import middleware from '../middleware/auth.js';
 import etrash from '../controller/etrash.js'
 
+
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
-
+app.use(express.static('public/images/dokter'));
 app.get('/', (req, res) => {
     res.send('Hello World!');
 }
