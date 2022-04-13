@@ -289,11 +289,11 @@ const admPostPasienUpdate = async (req, res) => {
             message: "Request body is missing",
         });
     }
-    const { id_reservasi,  id_poli, id_dokter, status, alasan, alamat  } = req.body;
+    const { id_reservasi,  id_poli, id_dokter, status, alasan,   } = req.body;
     try {
         koneksi.query(
-            "UPDATE edokter_reservasi SET  id_poli=?,  id_dokter=?, status=?, alasan=?, alamat=? WHERE id_reservasi=?",
-            [id_poli, id_dokter, status, alasan,alamat, id_reservasi],
+            "UPDATE edokter_reservasi SET  id_poli=?,  id_dokter=?, status=?, alasan=?,  WHERE id_reservasi=?",
+            [id_poli, id_dokter, status, alasan, id_reservasi],
             (err, results) => {
                 if (err) {
                     res.status(500).send(err);
