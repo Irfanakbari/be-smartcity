@@ -35,7 +35,7 @@ app.get('/api/edokter/admin/home', middleware.verifyToken, edokter.admGetHome);
 app.get('/api/edokter/admin/dokter', middleware.verifyToken, edokter.admGetDokter);
 app.delete('/api/edokter/admin/dokter/:id', middleware.verifyToken, edokter.admDelDokter);
 app.post('/api/edokter/admin/dokter', middleware.verifyToken, edokter.admPostDokter);
-app.get('/api/edokter/admin/dokterimage/:id',  edokter.admGetDokterImage);
+app.get('/api/edokter/admin/pasien', middleware.verifyToken, edokter.admGetPasien);
 
 
 // e-trash

@@ -257,6 +257,32 @@ const admGetDokterImage = async (req, res) => {
     return res.sendFile(path.resolve(location + id + '.jpg'));
 }
 
+const admGetPasien = async (req, res) => {
+    const nik = req.user.nik;
+    var me = await getMe(nik);
+    var data;
+
+    try {
+        koneksi.query(
+            "SELECT * FROM edokter_reservasi WHERE id_rs = ? ORDER BY tanggal DESC",
+            [me[0].id_rs],
+            (err, results) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    data = results;
+                    res.status(200).send(data);
+                }
+            }
+        );
+    }
+    catch (err) {
+        return res.status(500).send({
+            message: "Error",
+        });
+    }
+}
+
 
 function getMe(nik) {
     return new Promise((resolve, reject) => {
@@ -285,5 +311,6 @@ export default {
     admGetDokter,
     admDelDokter,
     admPostDokter,
-    admGetDokterImage
+    admGetDokterImage,
+    admGetPasien
 };

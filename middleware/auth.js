@@ -7,6 +7,11 @@ const key = "habib18102002";
 
 const verifyToken = (req, res, next) => {
     const { authorization } = req.headers;
+    if (!authorization) {
+        return res.status(401).send({
+            message: "Token is not provided",
+        });
+    }
     let token = authorization.split(" ")[1];
     if (!token) {
         return res.status(401).send({
@@ -32,6 +37,11 @@ const verifyToken = (req, res, next) => {
 
 const verifyToken2 = (req, res, next) => {
     const { authorization } = req.headers;
+    if (!authorization) {
+        return res.status(401).send({
+            message: "Token is not provided",
+        });
+    }
     let token = authorization.split(" ")[1];
     if (!token) {
         return res.status(401).send({
