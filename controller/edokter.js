@@ -264,7 +264,7 @@ const admGetPasien = async (req, res) => {
 
     try {
         koneksi.query(
-            "SELECT * FROM edokter_reservasi WHERE id_rs = ? ORDER BY tanggal DESC",
+            "SELECT * FROM edokter_reservasi JOIN edokter_dokter ON edokter_reservasi.id_dokter = edokter_dokter.id_dokter WHERE edokter_reservasi.id_rs = ? ORDER BY tanggal DESC",
             [me[0].id_rs],
             (err, results) => {
                 if (err) {
