@@ -24,10 +24,10 @@ const getJadwal = (req, res) => {
 
 const postJadwal = (req, res) => {
     try {
-        const { nik, nama, usia, jk, alamat, rs_tujuan, poli, tanggal, keluhan, dokter } = req.body;
+        const { nik, nama, usia, jk, alamat, rs_tujuan, poli, tanggal, keluhan, dokter, notelp } = req.body;
         koneksi.query(
-            "INSERT INTO edokter_reservasi (nik_pasien, id_dokter, id_rs, tanggal, nama, jk, usia, alamat, id_poli, keluhan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            [nik, dokter, rs_tujuan, tanggal, nama, jk, usia, alamat, poli, keluhan],
+            "INSERT INTO edokter_reservasi (nik_pasien, id_dokter, id_rs, tanggal, nama, jk, usia, alamat, id_poli, keluhan, notelp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)",
+            [nik, dokter, rs_tujuan, tanggal, nama, jk, usia, alamat, poli, keluhan, notelp],
             (err, results) => {
                 if (err) {
                     res.status(500).send(err);
