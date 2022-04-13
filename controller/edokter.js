@@ -283,6 +283,33 @@ const admGetPasien = async (req, res) => {
     }
 }
 
+const admPostPasienUpdate = async (req, res) => {
+    if (req.body == null) {
+        return res.status(400).send({
+            message: "Request body is missing",
+        });
+    }
+    const { id_reservasi,  id_poli, id_dokter, status, alasan  } = req.body;
+    try {
+        koneksi.query(
+            "UPDATE edokter_reservasi SET  id_poli=?,  id_dokter=?, status?, alasan? WHERE id_reservasi=?",
+            [id_poli, id_dokter, id_reservasi, status, alasan],
+            (err, results) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.status(200).send(results);
+                }
+            }
+        );
+    }
+    catch (err) {
+        return res.status(500).send({
+            message: "Error",
+        });
+    }
+}
+
 
 function getMe(nik) {
     return new Promise((resolve, reject) => {
@@ -312,5 +339,6 @@ export default {
     admDelDokter,
     admPostDokter,
     admGetDokterImage,
-    admGetPasien
+    admGetPasien,
+    admPostPasienUpdate
 };
