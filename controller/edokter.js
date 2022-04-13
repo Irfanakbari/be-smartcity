@@ -292,7 +292,7 @@ const admPostPasienUpdate = async (req, res) => {
     const { id_reservasi,  id_poli, id_dokter, status, alasan  } = req.body;
     try {
         koneksi.query(
-            "UPDATE edokter_reservasi SET  id_poli=?,  id_dokter=?, status?, alasan? WHERE id_reservasi=?",
+            "UPDATE edokter_reservasi SET  id_poli=?,  id_dokter=?, status=?, alasan=? WHERE id_reservasi=?",
             [id_poli, id_dokter, status, alasan, id_reservasi],
             (err, results) => {
                 if (err) {
