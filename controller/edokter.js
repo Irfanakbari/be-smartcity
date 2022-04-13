@@ -1,6 +1,7 @@
 import koneksi from "../config/database.js";
 import path from "path";
 import fs from "fs-extra";
+import { admin } from "../config/firebase.cjs";
 
 const getJadwal = (req, res) => {
     try {
@@ -32,7 +33,9 @@ const postJadwal = (req, res) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                    res.status(200).send(results);
+                    res.status(200).send({
+                        id_reservasi: results.insertId,
+                    });
                 }
             }
         );
@@ -291,6 +294,27 @@ const admPostPasienUpdate = async (req, res) => {
     }
     const { id_reservasi,  id_poli, id_dokter, status, alasan,   } = req.body;
     try {
+        if (status == 2){
+            admin.messaging().send(
+                {
+                    notification: {
+                        title: "Reservasi Diterima",
+                        body: "Permintaan reservasi anda telah diterima"
+                    },
+                    topic: `${id_reservasi}`
+                }
+            )
+        } else if (status == 0){
+            admin.messaging().send(
+                {
+                    notification: {
+                        title: "Reservasi Ditolak",
+                        body: "Mohon maaf, permintaan anda tidak dapat diterima"
+                    },
+                    topic: `${id_reservasi}`
+                }
+            )
+        }
         koneksi.query(
             "UPDATE edokter_reservasi SET  id_poli=?,  id_dokter=?, status=?, alasan=?  WHERE id_reservasi=?",
             [id_poli, id_dokter, status, alasan, id_reservasi],
